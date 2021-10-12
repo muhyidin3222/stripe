@@ -1,0 +1,96 @@
+.wpModal {
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    max-height: 900px;
+    background-color: #fff;
+    // box-shadow: 0 7px 14px 0 rgb(60 66 87 / 8%), 0 3px 6px 0 rgb(0 0 0 / 12%);
+    padding: 40px;
+    border-radius: 2px;
+    // padding-left: 20px;
+}
+
+.paddingBottom {
+    margin-bottom: 20px;
+}
+
+.contentTop {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonRight {
+    // background-color: ;
+}
+
+.contentRight {
+}
+
+.contentLeft {
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    font-weight: 700;
+}
+
+.text {
+    margin-left: 12px;
+}
+
+.contentMiddle {
+    padding-top: 34px;
+}
+
+.titleXl {
+    font-size: 24px;
+    color: #1a1f36;
+    font-weight: bold;
+}
+.titleX {
+    font-size: 18px;
+    color: #1a1f36;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.cardList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    div {
+        color: #3c4257;
+        font-weight: 400;
+        font-size: 14px;
+    }
+}
+
+.buttonModal {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 12px;
+    justify-content: flex-end;
+}
+
+.textBottom {
+    color: #3c4257;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.wpImageSizeSm {
+    display: flex;
+}
+
+.radioStatus {
+    margin-top: 30px;
+}
+
+.title {
+    font-size: 14;
+    font-weight: 500;
+}
+
+.dec {
+}

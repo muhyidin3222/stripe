@@ -1,0 +1,339 @@
+{
+    "status": "success",
+    "statusCode": 200,
+    "payload": {
+        "object": "list",
+        "data": [
+            {
+                "id": "iauth_1JVF6hCnDW8DvEOup7sqpKXO",
+                "object": "issuing.authorization",
+                "amount": 0,
+                "amount_details": {
+                    "atm_fee": null
+                },
+                "approved": true,
+                "authorization_method": "online",
+                "balance_transactions": [
+                    {
+                        "id": "txn_1JVF6iCnDW8DvEOuXflpVJXq",
+                        "object": "balance_transaction",
+                        "amount": -100,
+                        "available_on": 1630586008,
+                        "created": 1630586008,
+                        "currency": "usd",
+                        "description": "Hold for authorization",
+                        "exchange_rate": null,
+                        "fee": 0,
+                        "fee_details": [],
+                        "net": -100,
+                        "reporting_category": "issuing_authorization_hold",
+                        "source": "iauth_1JVF6hCnDW8DvEOup7sqpKXO",
+                        "status": "available",
+                        "type": "issuing_authorization_hold"
+                    },
+                    {
+                        "id": "txn_1JVF6lCnDW8DvEOuFnID6lCA",
+                        "object": "balance_transaction",
+                        "amount": 100,
+                        "available_on": 1630586011,
+                        "created": 1630586011,
+                        "currency": "usd",
+                        "description": "Released hold for authorization due to reversal",
+                        "exchange_rate": null,
+                        "fee": 0,
+                        "fee_details": [],
+                        "net": 100,
+                        "reporting_category": "issuing_authorization_release",
+                        "source": "iauth_1JVF6hCnDW8DvEOup7sqpKXO",
+                        "status": "available",
+                        "type": "issuing_authorization_release"
+                    }
+                ],
+                "card": {
+                    "id": "ic_1JVEquCnDW8DvEOuA3ENtwrR",
+                    "object": "issuing.card",
+                    "brand": "Visa",
+                    "cancellation_reason": null,
+                    "cardholder": {
+                        "id": "ich_1JVEqlCnDW8DvEOuVaWs30nT",
+                        "object": "issuing.cardholder",
+                        "billing": {
+                            "address": {
+                                "city": "Murfreesboro",
+                                "country": "US",
+                                "line1": "1303 Hodge Dr",
+                                "line2": null,
+                                "postal_code": "37130",
+                                "state": "TN"
+                            }
+                        },
+                        "company": null,
+                        "created": 1630585019,
+                        "email": null,
+                        "individual": {
+                            "dob": null,
+                            "first_name": "Bernadette",
+                            "last_name": "Chester",
+                            "verification": {
+                                "document": {
+                                    "back": null,
+                                    "front": null
+                                }
+                            }
+                        },
+                        "livemode": true,
+                        "metadata": {},
+                        "name": "Bernadette Chester",
+                        "phone_number": null,
+                        "requirements": {
+                            "disabled_reason": null,
+                            "past_due": []
+                        },
+                        "spending_controls": {
+                            "allowed_categories": [],
+                            "blocked_categories": [],
+                            "spending_limits": [],
+                            "spending_limits_currency": null
+                        },
+                        "status": "active",
+                        "type": "individual"
+                    },
+                    "created": 1630585028,
+                    "currency": "usd",
+                    "exp_month": 8,
+                    "exp_year": 2024,
+                    "last4": "5991",
+                    "livemode": true,
+                    "metadata": {},
+                    "replaced_by": null,
+                    "replacement_for": null,
+                    "replacement_reason": null,
+                    "shipping": null,
+                    "spending_controls": {
+                        "allowed_categories": [
+                            "ac_refrigeration_repair"
+                        ],
+                        "blocked_categories": [],
+                        "spending_limits": [
+                            {
+                                "amount": 50000,
+                                "categories": [],
+                                "interval": "daily"
+                            }
+                        ],
+                        "spending_limits_currency": "usd"
+                    },
+                    "status": "active",
+                    "type": "virtual"
+                },
+                "cardholder": "ich_1JVEqlCnDW8DvEOuVaWs30nT",
+                "created": 1630586007,
+                "currency": "usd",
+                "livemode": true,
+                "merchant_amount": 0,
+                "merchant_currency": "usd",
+                "merchant_data": {
+                    "category": "computer_software_stores",
+                    "category_code": "5734",
+                    "city": "+16468274366",
+                    "country": "US",
+                    "name": "DIGITALOCEAN.COM",
+                    "network_id": "T8LQCJF1R5GHLTR",
+                    "postal_code": "10013",
+                    "state": "NY"
+                },
+                "metadata": {},
+                "pending_request": null,
+                "request_history": [
+                    {
+                        "amount": 100,
+                        "amount_details": {
+                            "atm_fee": null
+                        },
+                        "approved": true,
+                        "created": 1630586008,
+                        "currency": "usd",
+                        "merchant_amount": 100,
+                        "merchant_currency": "usd",
+                        "reason": "card_active"
+                    }
+                ],
+                "status": "reversed",
+                "transactions": [],
+                "verification_data": {
+                    "address_line1_check": "match",
+                    "address_postal_code_check": "match",
+                    "cvc_check": "match",
+                    "expiry_check": "match"
+                },
+                "wallet": null
+            },
+            {
+                "id": "iauth_1JVExCCnDW8DvEOukCc1RUEY",
+                "object": "issuing.authorization",
+                "amount": 0,
+                "amount_details": {
+                    "atm_fee": null
+                },
+                "approved": true,
+                "authorization_method": "online",
+                "balance_transactions": [
+                    {
+                        "id": "txn_1JVExCCnDW8DvEOuXTXnb6Q5",
+                        "object": "balance_transaction",
+                        "amount": -100,
+                        "available_on": 1630585418,
+                        "created": 1630585418,
+                        "currency": "usd",
+                        "description": "Hold for authorization",
+                        "exchange_rate": null,
+                        "fee": 0,
+                        "fee_details": [],
+                        "net": -100,
+                        "reporting_category": "issuing_authorization_hold",
+                        "source": "iauth_1JVExCCnDW8DvEOukCc1RUEY",
+                        "status": "available",
+                        "type": "issuing_authorization_hold"
+                    },
+                    {
+                        "id": "txn_1JVExFCnDW8DvEOuYEvXJq8Y",
+                        "object": "balance_transaction",
+                        "amount": 100,
+                        "available_on": 1630585421,
+                        "created": 1630585421,
+                        "currency": "usd",
+                        "description": "Released hold for authorization due to reversal",
+                        "exchange_rate": null,
+                        "fee": 0,
+                        "fee_details": [],
+                        "net": 100,
+                        "reporting_category": "issuing_authorization_release",
+                        "source": "iauth_1JVExCCnDW8DvEOukCc1RUEY",
+                        "status": "available",
+                        "type": "issuing_authorization_release"
+                    }
+                ],
+                "card": {
+                    "id": "ic_1JVEquCnDW8DvEOuA3ENtwrR",
+                    "object": "issuing.card",
+                    "brand": "Visa",
+                    "cancellation_reason": null,
+                    "cardholder": {
+                        "id": "ich_1JVEqlCnDW8DvEOuVaWs30nT",
+                        "object": "issuing.cardholder",
+                        "billing": {
+                            "address": {
+                                "city": "Murfreesboro",
+                                "country": "US",
+                                "line1": "1303 Hodge Dr",
+                                "line2": null,
+                                "postal_code": "37130",
+                                "state": "TN"
+                            }
+                        },
+                        "company": null,
+                        "created": 1630585019,
+                        "email": null,
+                        "individual": {
+                            "dob": null,
+                            "first_name": "Bernadette",
+                            "last_name": "Chester",
+                            "verification": {
+                                "document": {
+                                    "back": null,
+                                    "front": null
+                                }
+                            }
+                        },
+                        "livemode": true,
+                        "metadata": {},
+                        "name": "Bernadette Chester",
+                        "phone_number": null,
+                        "requirements": {
+                            "disabled_reason": null,
+                            "past_due": []
+                        },
+                        "spending_controls": {
+                            "allowed_categories": [],
+                            "blocked_categories": [],
+                            "spending_limits": [],
+                            "spending_limits_currency": null
+                        },
+                        "status": "active",
+                        "type": "individual"
+                    },
+                    "created": 1630585028,
+                    "currency": "usd",
+                    "exp_month": 8,
+                    "exp_year": 2024,
+                    "last4": "5991",
+                    "livemode": true,
+                    "metadata": {},
+                    "replaced_by": null,
+                    "replacement_for": null,
+                    "replacement_reason": null,
+                    "shipping": null,
+                    "spending_controls": {
+                        "allowed_categories": [
+                            "ac_refrigeration_repair"
+                        ],
+                        "blocked_categories": [],
+                        "spending_limits": [
+                            {
+                                "amount": 50000,
+                                "categories": [],
+                                "interval": "daily"
+                            }
+                        ],
+                        "spending_limits_currency": "usd"
+                    },
+                    "status": "active",
+                    "type": "virtual"
+                },
+                "cardholder": "ich_1JVEqlCnDW8DvEOuVaWs30nT",
+                "created": 1630585418,
+                "currency": "usd",
+                "livemode": true,
+                "merchant_amount": 0,
+                "merchant_currency": "usd",
+                "merchant_data": {
+                    "category": "computer_software_stores",
+                    "category_code": "5734",
+                    "city": "35318033800",
+                    "country": "US",
+                    "name": "ORACLE USA INC.",
+                    "network_id": "604983000492496",
+                    "postal_code": "94065",
+                    "state": "CA"
+                },
+                "metadata": {},
+                "pending_request": null,
+                "request_history": [
+                    {
+                        "amount": 100,
+                        "amount_details": {
+                            "atm_fee": null
+                        },
+                        "approved": true,
+                        "created": 1630585418,
+                        "currency": "usd",
+                        "merchant_amount": 100,
+                        "merchant_currency": "usd",
+                        "reason": "card_active"
+                    }
+                ],
+                "status": "reversed",
+                "transactions": [],
+                "verification_data": {
+                    "address_line1_check": "match",
+                    "address_postal_code_check": "match",
+                    "cvc_check": "match",
+                    "expiry_check": "match"
+                },
+                "wallet": null
+            }
+        ],
+        "has_more": false,
+        "url": "/v1/issuing/authorizations"
+    }
+}

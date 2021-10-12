@@ -1,0 +1,52 @@
+.headerEdit {
+    display: flex;
+    width: 100%;
+    max-width: 300px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panelScss {
+    .ant-collapse-header {
+        display: flex;
+    }
+}
+
+.label {
+    // font-size: 12px;
+    color: gray;
+    font-weight: bold;
+}
+
+.right {
+}
+
+.valueText {
+    margin-left: 5px;
+}
+
+.wpLabel {
+    padding: 8px 0px 8px 0px;
+}
+
+.collapseEditCustomer {
+    padding: 8px 0px 8px 0px;
+}
+
+.metadataList {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.listBalance {
+    margin-top: 5px;
+    padding: 8px;
+    background-color: white;
+}
+
+.textList{
+    font-size: 16px;
+    font-weight: 500;
+}

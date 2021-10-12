@@ -1,0 +1,20 @@
+.header {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    // padding-left: 0px;
+    justify-content: space-between;
+
+    .input {
+        // padding-left: 80px;
+    }
+
+    .dec {
+        font-size: 10px;
+        color: rgb(161, 161, 161);
+    }
+
+    .title {
+        font-weight: 600;
+    }
+}

@@ -1,0 +1,171 @@
+.wpModal {
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    max-height: 900px;
+    background-color: #fff;
+    // box-shadow: 0 7px 14px 0 rgb(60 66 87 / 8%), 0 3px 6px 0 rgb(0 0 0 / 12%);
+    padding: 40px;
+    border-radius: 2px;
+    // padding-left: 20px;
+}
+
+.paddingBottom {
+    margin-bottom: 20px;
+}
+
+.contentTop {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonRight {
+    // background-color: ;
+}
+
+.contentRight {
+}
+
+.contentLeft {
+    display: flex;
+    font-size: 12px;
+    align-items: center;
+    font-weight: 700;
+}
+
+.text {
+    margin-left: 12px;
+}
+
+.contentMiddle {
+    background-color: #fff;
+    width: 100%;
+}
+
+.titleXl {
+    font-size: 24px;
+    color: #1a1f36;
+    font-weight: bold;
+}
+.titleX {
+    font-size: 18px;
+    color: #1a1f36;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.cardList {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    div {
+        color: #3c4257;
+        font-weight: 400;
+        font-size: 14px;
+    }
+}
+
+.buttonModal {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 12px;
+    justify-content: flex-end;
+}
+
+.textBottom {
+    color: #3c4257;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.wpImageSizeSm {
+    display: flex;
+}
+
+.listItem {
+    border-left: 1px solid #f0f0f0;
+    border-right: 1px solid #f0f0f0;
+    padding: 0px;
+    padding-top: 2px;
+}
+
+.activeItem {
+    color: rgb(84, 105, 212);
+    background-color: rgb(230, 230, 230);
+    padding: 12px;
+}
+
+.itemMeta {
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.75s;
+
+    &:hover {
+        color: rgb(84, 105, 212);
+    }
+}
+
+.demoInfiniteContainer {
+    height: 100%;
+    padding: 8px 24px;
+    overflow: auto;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+}
+
+.tabelStyle {
+}
+
+.wpColumn {
+    display: flex;
+    align-items: center;
+    padding: 5px 0px 5px 0px;
+}
+
+.wpColumnLeft {
+    width: 100%;
+    max-width: 120px;
+    // color: #e8e8e8;
+}
+
+.title {
+    size: 16px;
+    font-weight: bold;
+}
+
+.wpContentRight {
+    padding: 20px;
+    background: #fff;
+    height: 100%;
+}
+
+.mainContainer {
+    // background: #fff;
+}
+
+.line2 {
+    display: flex;
+    margin: 20px 0px 12px 0px;
+
+    .content {
+        margin-right: 12px;
+    }
+}
+
+.line3 {
+    display: flex;
+    width: 100%;
+    margin: 20px 0px 12px 0px;
+    justify-content: space-between;
+    align-items: center;
+
+    .content {
+        margin-right: 12px;
+    }
+}

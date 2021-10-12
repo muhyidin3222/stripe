@@ -1,0 +1,42 @@
+{
+  "name": "Stripe",
+  "version": "0.0.1",
+  "description": "Stripe",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js --ignore session --ignore storages --ignore bin --ignore public",
+    "test": "mocha test/*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.15.2",
+    "config": "^3.3.3",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "express-useragent": "^1.0.15",
+    "fs": "0.0.1-security",
+    "guid": "0.0.12",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.23.0",
+    "mysql": "^2.12.0",
+    "mysql2": "^2.3.0",
+    "path": "^0.12.7",
+    "request": "^2.83.0",
+    "sequelize": "^5.21.3",
+    "sequelize-cli": "^5.5.1",
+    "stripe": "^8.170.0",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^1.19.2"
+  }
+}

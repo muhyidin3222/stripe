@@ -1,0 +1,44 @@
+.titleXl {
+    font-size: 28px;
+    color: #1a1f36;
+    font-weight: bold;
+}
+.titleX {
+    font-size: 18px;
+    color: #1a1f36;
+    font-weight: bold;
+}
+
+.imageSizeSm {
+    width: 40px;
+    width: 40px;
+    border-radius: 5;
+}
+
+.content {
+    width: 100%;
+    display: flex;
+    padding: 10px 30px 10px 10px;
+    // align-items: center;
+    justify-content: flex-end;
+    background: red;
+    background: #fff;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    size: 10px;
+    .wpContent {
+        margin-left: 10px;
+        .color {
+            color: rgb(126, 127, 128);
+        }
+    }
+}
+
+.left {
+}
+.right {
+    margin-left: 10px;
+}

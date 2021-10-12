@@ -1,0 +1,15 @@
+import axios from 'config/axiosConfig'
+
+export const invoicesCreateService = data => axios.post("/privateUser/invoices/invoicesCreate", data)
+export const invoicesGetIdService = data => axios.post("/privateUser/invoices/invoicesGetId", data)
+export const invoicesDeleteService = data => axios.post("/privateUser/invoices/invoicesDelete", data)
+export const invoicesListService = data => axios.post("/privateUser/invoices/invoicesList", data)
+export const invoicesUpdateService = data => axios.post("/privateUser/invoices/invoicesUpdate", data)
+export const invoicesFinalizeInvoiceService = data => axios.post("/privateUser/invoices/invoicesFinalizeInvoice", data)
+export const invoicesPayService = data => axios.post("/privateUser/invoices/invoicesPay", data)
+export const invoicesSendInvoiceService = data => axios.post("/privateUser/invoices/invoicesSendInvoice", data)
+export const invoicesVoidInvoiceService = data => axios.post("/privateUser/invoices/invoicesVoidInvoice", data)
+export const invoicesMarkUncollectibleService = data => axios.post("/privateUser/invoices/invoicesMarkUncollectible", data)
+export const invoicesListLineItemsService = data => axios.post("/privateUser/invoices/invoicesListLineItems", data)
+export const invoicesRetrieveUpcomingService = data => axios.post("/privateUser/invoices/invoicesRetrieveUpcoming", data)
+export const invoicesListUpcomingLineItemsService = data => axios.post("/privateUser/invoices/invoicesListUpcomingLineItems", data)
