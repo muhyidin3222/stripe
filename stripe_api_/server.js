@@ -5,11 +5,11 @@ require('dotenv').config();
 // Global START
 global.ENV = process.env.NODE_ENV || `development`
 global.Sequelize = require(`sequelize`)
-global._db = require(`${__dirname}/core/db`).getConnection()
+// global._db = require(`${__dirname}/core/db`).getConnection()
 global._controller = require(`${__dirname}/apps/controllers`)
 global._lib = require(`${__dirname}/apps/libs`)
 // global._router = require(`${__dirname}/apps/routes`)
-global._model = require(`${__dirname}/database/models`)
+// global._model = require(`${__dirname}/database/models`)
 global.moment = require(`moment`)
 global._config = require(`${__dirname}/apps/config`)
 
