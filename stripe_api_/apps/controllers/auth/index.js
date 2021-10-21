@@ -1,11 +1,13 @@
 const { cryptoDecrypt } = _lib('crypto')
 const { signToken } = _lib('jwt')
 const fs = require('fs')
-const path =`../../../.env` 
+const path = `../../../.env`
 
 exports.login = async (req, res, next) => {
+    console.log(req.body)
     try {
         const { dataEncrypt } = req.body
+        console.log(req.body)
         const { public_key, email, secret_key } = await cryptoDecrypt(dataEncrypt)
         // console.log(cryptoDecrypt(dataEncrypt))
         const errorshowpublickey = public_key.length > 80 && (public_key.includes("pk_live_51") || public_key.includes("pk_test_51"))
