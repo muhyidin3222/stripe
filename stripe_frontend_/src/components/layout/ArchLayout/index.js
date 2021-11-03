@@ -9,10 +9,9 @@ import { useSelector, useDispatch } from 'react-redux'
 const { Content } = Layout;
 
 export default function Dashboard (props) {
-    const history = useHistory()
+    // const history = useHistory()
     const { general: { collapsed } } = useSelector(state => state)
     const dispatch = useDispatch()
-
 
     useEffect(() => {
         function handleResize () {
@@ -39,11 +38,10 @@ export default function Dashboard (props) {
             <Layout>
                 <Topbar
                     className="arch-header"
-                    // style={{ paddingLeft: collapsed ? 100 : 30, height: 180, display: "flex", alignItems: "center",  }}
+                    style={{ paddingLeft: collapsed ? 100 : 30, height: 180, display: "flex", alignItems: "center", }}
                     collapsed={collapsed}
                     setCollapsed={() => collapsedChange(!collapsed)}
                 />
-
                 <Content
                     className="arch-container"
                     style={{ padding: 30 }}

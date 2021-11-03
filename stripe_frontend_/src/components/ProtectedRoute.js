@@ -7,22 +7,21 @@ const ProtectedRoute = ({
   ...rest
 }) => {
   const { isAuthenticated, isVerifying } = useSelector(state => state.auth)
+  console.log(isAuthenticated, isVerifying)
   return (
     <Route
       {...rest}
       render={props =>
-        isVerifying ? (
-          <div />
-        ) : isAuthenticated ? (
+        isAuthenticated ? (
           <Component {...props} />
         ) : (
-              <Redirect
-                to={{
-                  pathname: "/login",
-                  state: { from: props.location }
-                }}
-              />
-            )
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: props.location }
+            }}
+          />
+        )
       }
     />
   )

@@ -32,7 +32,7 @@ export const MainListItems = ({ collapsed }) => {
             }}>Stripe clone</div>
             <Menu
                 onClick={handleClick}
-                style={{ width: collapsed ? "auto" : 250, height: "100%" }}
+                style={{ width: collapsed ? "auto" : 250, height: "100%", backgroundColor: "#ffffff" }}
                 defaultSelectedKeys={[pathname]}
                 defaultOpenKeys={[splitPathname]}
                 // openKeys={[pathname]}
@@ -46,6 +46,7 @@ export const MainListItems = ({ collapsed }) => {
                                 key={value.path}
                                 icon={value.icon}
                                 title={value.name}
+                                style={{ backgroundColor: "#ffffff" }}
                             >
                                 {
                                     value.subMenu ?

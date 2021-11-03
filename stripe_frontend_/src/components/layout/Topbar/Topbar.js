@@ -37,7 +37,7 @@ const Topbar = props => {
       className={scss.header}
       style={style}
     >
-      {/* <div className={scss.wpHeader}>
+      <div className={scss.wpHeader}>
         <Button
           onClick={() => setCollapsed(!collapsed)}
           type="link"
@@ -72,7 +72,7 @@ const Topbar = props => {
             </Button>
           </Dropdown>
         </Space>
-      </Space> */}
+      </Space>
     </Header>
   );
 };
