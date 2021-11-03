@@ -1,5 +1,6 @@
 {
-  "name": "bisa_ekspor_admin",
+  "name": "stripe",
+  "homepage":"http://stripe.fourpeople.org/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
