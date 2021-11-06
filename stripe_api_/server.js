@@ -45,18 +45,20 @@ app.use(bodyParser.urlencoded({
   parameterLimit: 1000000
 }))
 app.all('/privateUser/*', (req, res, next) => globalAuth(req, res, next))
+
 app.use(express.static(path.join(__dirname, '../stripe_frontend_/build')));
 app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, '../stripe_frontend_/build', 'index.html'));
 });
+
 app.use(router)
 app.use(routerPrivateUser)
 
-const corsOptions = {
-  origin: "http://localhost:3000"
-}
-app.use(cors(corsOptions));
-server.listen(process.env.PORT || 7878, '0.0.0.0', function () {
+// const corsOptions = {
+//   origin: "http://localhost:3000"
+// }
+// app.use(cors(corsOptions));
+server.listen(process.env.PORT || 8080, '0.0.0.0', function () {
   console.log("SERVER BERJALAN DI PORT " + process.env.PORT)
 })
 

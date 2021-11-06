@@ -49,8 +49,10 @@ const Login = () => {
     setemailshowsecret_key(emailshowsecretkey)
     setLoading(true)
     try {
+      console.log(!errorshowpublickey , !errorshowsecretkey , !emailshowsecretkey)
       if (!errorshowpublickey && !errorshowsecretkey && !emailshowsecretkey) {
         const dataCryptoEncrypt = await cryptoEncrypt(dataInput)
+        // console.log(dataCryptoEncrypt)
         const resLogin = await loginService({ dataEncrypt: dataCryptoEncrypt })
         if (resLogin?.data?.payload) {
           await disputes(verifyAuth(true))

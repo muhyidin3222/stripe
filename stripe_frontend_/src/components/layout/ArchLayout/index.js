@@ -30,15 +30,17 @@ export default function Dashboard (props) {
     }, []);
 
     return (
-        <Layout>
+        <Layout
+            style={{ background: "#fffff" }}
+        >
             <MainListItems
                 collapsed={collapsed}
                 setCollapsed={() => collapsedChange(!collapsed)}
             />
-            <Layout>
+            <Layout style={{ backgroundColor: "#ffffff" }}>
                 <Topbar
                     className="arch-header"
-                    style={{ paddingLeft: collapsed ? 100 : 30, height: 180, display: "flex", alignItems: "center", }}
+                    style={{ paddingLeft: collapsed ? 100 : 30, display: "flex", alignItems: "center", }}
                     collapsed={collapsed}
                     setCollapsed={() => collapsedChange(!collapsed)}
                 />

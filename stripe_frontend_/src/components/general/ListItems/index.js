@@ -20,6 +20,8 @@ export const MainListItems = ({ collapsed }) => {
             width={"auto"}
             trigger={null}
             collapsible
+            theme="light"
+            style={{ backgroundColor: "#ffffff", height: "100%" }}
             collapsed={collapsed}
         >
             <div className="logo" style={{

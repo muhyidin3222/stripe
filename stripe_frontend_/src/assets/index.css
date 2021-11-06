@@ -126,7 +126,8 @@ body {
 }
 
 .arch-container {
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  height: 100%;
   margin: 15px 25px 15px 0px;
   margin-top: 20px;
 }
@@ -138,11 +139,15 @@ body {
 .arch-header {
   box-shadow: 0 4px 8px 0 rgba(184, 184, 184, 0.2);
   padding-right: 24px;
-
+  height: 70px;
 }
 .ant-layout-header {
   padding-left: 30px;
   padding-right: 100px;
+
+  box-shadow: 0 4px 8px 0 rgba(184, 184, 184, 0.2);
+  padding-right: 24px;
+  height: 70px;
 }
 
 .arch-header .trigger {
@@ -167,7 +172,6 @@ body {
   left: 0;
 }
 
-
 .ant-layout-sider:not(.ant-layout-sider-collapsed) + .ant-layout {
   margin-left: 230px;
 }
@@ -175,12 +179,8 @@ body {
 .ant-layout-sider-collapsed + .ant-layout {
   margin-left: 0px !important;
 }
-/* 
-.ant-layout-sider:not(.ant-layout-sider-collapsed) .logo-container .logo {
-  height: 30px;
-} */
 
-/* .ant-layout-sider-collapsed .logo-container .logo {
-  height: 50px;
-  width: 50px;
-} */
+
+.ant-layout-has-sider{
+  height: 100%;
+}
