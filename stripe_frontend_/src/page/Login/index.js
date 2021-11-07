@@ -49,7 +49,7 @@ const Login = () => {
     setemailshowsecret_key(emailshowsecretkey)
     setLoading(true)
     try {
-      console.log(!errorshowpublickey , !errorshowsecretkey , !emailshowsecretkey)
+      console.log(!errorshowpublickey, !errorshowsecretkey, !emailshowsecretkey)
       if (!errorshowpublickey && !errorshowsecretkey && !emailshowsecretkey) {
         const dataCryptoEncrypt = await cryptoEncrypt(dataInput)
         // console.log(dataCryptoEncrypt)
@@ -58,9 +58,9 @@ const Login = () => {
           await disputes(verifyAuth(true))
           await setCookie('token', resLogin?.data?.payload?.token, 30)
           await setCookie('public_key', dataInput?.public_key, 30)
-          message.success("success login")
-          history.push("/customers/main")
-         window.location.reload();
+          await message.success("success login")
+          await history.push("/customers/main")
+          window.location.reload();
         }
       } else {
         message.error("invalid input")
