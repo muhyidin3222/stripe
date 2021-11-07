@@ -8,10 +8,6 @@ import { Modal, Form, Input, Button, Select, Checkbox, Row, Col, Collapse, Typog
 import ArchIntroLayout from 'components/layout/ArchIntroLayout'
 import { verifyAuth } from 'redux/actions'
 
-//material
-import { TextField, FormControlLabel, Link, Grid, InputLabel, IconButton, InputAdornment, OutlinedInput, FormControl } from '@material-ui/core';
-import { Visibility, VisibilityOff } from '@material-ui/icons';
-
 //style
 import useStyles from 'assets/style/page/auth'
 import { cryptoEncrypt } from 'utils/crypto'
@@ -55,12 +51,18 @@ const Login = () => {
         // console.log(dataCryptoEncrypt)
         const resLogin = await loginService({ dataEncrypt: dataCryptoEncrypt })
         if (resLogin?.data?.payload) {
+          console.log(resLogin?.data?.payload?.token)
           await setCookie('token', resLogin?.data?.payload?.token, 1)
           await setCookie('public_key', dataInput?.public_key, 1)
           await disputes(verifyAuth(true))
           await message.success("success login")
           await history.push("/customers/main")
-          window.location.reload();
+          setdataInput({
+            public_key: "",
+            email: "",
+            secret_key: ""
+          })
+          // window.location.reload();
         }
       } else {
         message.error("invalid input")

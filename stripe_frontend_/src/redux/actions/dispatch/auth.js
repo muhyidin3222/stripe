@@ -1,10 +1,9 @@
 import { LOGIN_SUCCESS, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE, VERIFY_REQUEST, VERIFY_SUCCESS } from 'redux/actions'
 import { setCookie, getCookie } from 'utils/cookies'
 
-export const verifyAuth = (checkParam ) => dispatch => {
+export const verifyAuth = (checkParam) => async dispatch => {
     dispatch({ type: VERIFY_REQUEST })
-    const cookie = getCookie("token")
-    // console.log(cookie, "cookie")
+    const cookie = await getCookie("token")
     if (cookie !== null || checkParam) {
         dispatch({
             type: LOGIN_SUCCESS,
