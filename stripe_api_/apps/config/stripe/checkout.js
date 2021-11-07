@@ -1,5 +1,5 @@
 "use strict"
 
-const stripe = require('./core').StripeSecret.checkout.sessions
+const stripe = require('./core').StripeSecret.checkout
 
 exports.checkoutList = (data) => stripe.list(data)
