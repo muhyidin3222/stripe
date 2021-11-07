@@ -35,4 +35,5 @@ module.exports = [
     '/issuing/new-card',
     '/customers/main',
     '/customers/edit/:id',
+    '/login'
 ]
