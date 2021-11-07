@@ -23,6 +23,7 @@ export const MainListItems = ({ collapsed }) => {
             theme="light"
             style={{ backgroundColor: "#ffffff", height: "100%" }}
             collapsed={collapsed}
+            className={!collapsed && "ant-layout-sider-active"}
         >
             <div className="logo" style={{
                 height: 70,
@@ -34,7 +35,7 @@ export const MainListItems = ({ collapsed }) => {
             }}>Stripe clone</div>
             <Menu
                 onClick={handleClick}
-                style={{ width: collapsed ? "auto" : 250, height: "100%", backgroundColor: "#ffffff" }}
+                style={{ width: collapsed ? "auto" : 250, maxWidth: collapsed ? "auto" : 250, height: "100%", backgroundColor: "#ffffff" }}
                 defaultSelectedKeys={[pathname]}
                 defaultOpenKeys={[splitPathname]}
                 // openKeys={[pathname]}

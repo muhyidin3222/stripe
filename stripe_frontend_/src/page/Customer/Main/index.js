@@ -5,29 +5,23 @@ import { useSelector, useDispatch } from 'react-redux'
 import { customersListDispatch } from 'redux/actions'
 import moment from 'moment';
 import ArchLayout from 'components/layout/ArchLayout'
-import { Table, Typography, Button } from 'antd';
-import { PlusOutlined, FilterOutlined, ExportOutlined } from '@ant-design/icons'
-import scssConfig from 'assets/scss/config.module.scss'
+import { Table, Button } from 'antd';
+import { PlusOutlined } from '@ant-design/icons'
 import scss from 'assets/scss/productMainCreate.module.scss'
-import { customersGetIdService } from 'services'
 import ModalAddCustomer from 'components/general/Modal/AddCustomer'
-import ModalExport from 'components/general/Modal/Export'
-import xlsx from 'json-as-xlsx'
+import Export from 'components/general/Modal/Export'
 import { listColumn, defaultColumn } from './exportData'
 import Pagination from 'components/general/Pagination'
 import { customersListService } from 'services/customers';
+import Filter from 'components/general/Select/Filter'
 
 export default () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { customers: { resCustomersList }, loading: { loadingGet }, loading } = useSelector(state => state)
     const [limit, setLimit] = useState(10);
-    const [page, setPage] = useState(0);
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [showModal, setShowModal] = useState(false)
-    const [showExport, setShowExport] = useState(false)
-    const [dataDonwload, setDataDonwload] = useState([])
-
 
     const apiBalance = async () => {
         await dispatch(customersListDispatch({
@@ -42,8 +36,7 @@ export default () => {
     }, [])
 
     const getDataDownload = async (dataParam) => {
-        const resDownload = await customersListService(dataParam)
-        setDataDonwload(resDownload?.data?.payload?.data)
+        return customersListService(dataParam)
     }
 
     const columns = [
@@ -62,9 +55,6 @@ export default () => {
             dataIndex: 'customer',
             key: 'customer',
             render: customer => {
-                // const detailCustomer = customersGetIdService(customer)
-                // console.log(detailCustomer?.data?.payload?.name, "detailCustomer?.data?.payload?.name")
-                // return detailCustomer?.data?.payload?.name || detailCustomer?.data?.payload?.email
                 return '-'
             }
         },
@@ -76,19 +66,6 @@ export default () => {
         },
     ]
 
-
-    const selectDownload = async ({ selectData }) => {
-        var settings = {
-            sheetName: 'First sheet',
-            fileName: "Customer",
-            extraLength: 3,
-            writeOptions: {}
-        }
-        var download = true
-        await xlsx(selectData, dataDonwload, settings, download)
-
-    }
-
     const onSelectChange = selectedRowKeys => {
         console.log('selectedRowKeys changed: ', selectedRowKeys);
         setSelectedRowKeys(selectedRowKeys)
@@ -99,7 +76,29 @@ export default () => {
         onChange: onSelectChange,
     };
 
-    // console.log(resCustomersList, "resCustomersList")
+    const filterClick = (value) => {
+        console.log(value, "filterClick")
+        dispatch(customersListDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
+
     return (
         <ArchLayout>
             <div>
@@ -108,18 +107,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Customer</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
-                        <Button
-                            size="small"
-                            onClick={() => setShowExport(true)}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Customer"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                         <Button
                             size="small"
                             onClick={() => setShowModal(true)}
@@ -154,15 +151,6 @@ export default () => {
                 showModal={showModal}
                 setShowModal={setShowModal}
                 getCustomer={apiBalance}
-            />
-            <ModalExport
-                modal={showExport}
-                setModal={setShowExport}
-                onGetApi={getDataDownload}
-                title={"Customer"}
-                dataColumn={listColumn}
-                selectDownload={selectDownload}
-                selectDataProps={defaultColumn}
             />
         </ArchLayout>
     )

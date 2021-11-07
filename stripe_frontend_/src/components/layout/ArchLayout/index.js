@@ -20,9 +20,9 @@ export default function Dashboard (props) {
                 innerWidth: window.innerWidth,
             })
             if (window.innerWidth > 900) {
-                collapsedChange(false)
+                dispatch(collapsedChange(false))
             } else {
-                collapsedChange(true)
+                dispatch(collapsedChange(true))
             }
         }
         window.addEventListener('resize', handleResize);
@@ -35,18 +35,18 @@ export default function Dashboard (props) {
         >
             <MainListItems
                 collapsed={collapsed}
-                setCollapsed={() => collapsedChange(!collapsed)}
+                setCollapsed={() => dispatch(collapsedChange(!collapsed))}
             />
             <Layout style={{ backgroundColor: "#ffffff" }}>
                 <Topbar
                     className="arch-header"
-                    style={{ paddingLeft: collapsed ? 100 : 30, display: "flex", alignItems: "center", }}
+                    style={{ paddingLeft: collapsed ? 100 : 60, display: "flex", alignItems: "center", }}
                     collapsed={collapsed}
-                    setCollapsed={() => collapsedChange(!collapsed)}
+                    setCollapsed={() => dispatch(collapsedChange(!collapsed))}
                 />
                 <Content
                     className="arch-container"
-                    style={{ padding: 30 }}
+                    style={{ padding: 30, marginLeft: collapsed ? 100 : 60, }}
                 >
                     {props.children}
                 </Content>

@@ -10,6 +10,9 @@ import Pagination from 'components/general/Pagination'
 import ModalTaxRates from 'components/general/Modal/TaxRates'
 import scss from 'assets/scss/productMainCreate.module.scss'
 import moment from 'moment';
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
+import { listColumn, defaultColumn } from './exportData'
 
 export default () => {
     const dispatch = useDispatch()
@@ -27,6 +30,19 @@ export default () => {
             limit: limit
         }))
     }
+
+
+    const filterClick = (value) => {
+        dispatch(texRatesGetAll({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return texRatesGetAll(dataParam)
+    }
+
 
     useEffect(() => {
         apiBalance()
@@ -84,32 +100,44 @@ export default () => {
         }
     ]
 
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
     return (
         <ArchLayout>
             <div>
                 <div className={scss.contentTop}>
                     <div className={scss.contentLeft}>
-                        <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Coupons</div>
+                        <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Tax Rate</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/products/create")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Tax Rate"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                         <Button
                             size="small"
                             onClick={() => setModalTaxRate({ modal: true })}
                             icon={<PlusOutlined />}
                             style={{ marginLeft: 10 }}
                         >Add</Button>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/products/create")}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button>
                     </div>
                 </div>
 

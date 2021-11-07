@@ -1,29 +1,18 @@
-import React, { useState, useEffect ,Fragment} from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { cardholderGetAllDispatch, authorizationsGetAllDispatch, eventsListDispatch } from 'redux/actions'
+import { authorizationsGetAllDispatch, eventsListDispatch } from 'redux/actions'
 import moment from 'moment';
 import ArchLayout from 'components/layout/ArchLayout'
-import CardholderDetail from 'components/general/Card/CardholderDetail'
-import Tabs from 'components/general/Tab'
-import Color from 'config/Color'
-import { Table, Typography, Button, Skeleton, List, Col, Row, Menu, Tag } from 'antd';
-import { PlusOutlined, FilterOutlined, ExportOutlined, Loading3QuartersOutlined, AppstoreOutlined, EditOutlined } from '@ant-design/icons'
-
-import scssConfig from 'assets/scss/config.module.scss'
+import { Table, Button, Col, Row, Menu, Tag } from 'antd';
+import { PlusOutlined, Loading3QuartersOutlined, AppstoreOutlined, EditOutlined } from '@ant-design/icons'
 import scss from 'assets/scss/issuingMainCreate.module.scss'
-import { customersGetIdService } from 'services'
 import { currencyFromat } from 'utils/format'
-import Pagination from 'components/general/Pagination'
-import scssPagination from 'assets/scss/config.module.scss'
-import { BorderStyleSharp } from '@material-ui/icons';
-
-const { gray } = Color.Border
-const { Title } = Typography
-const { SubMenu } = Menu;
-
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
+import { listColumn, defaultColumn } from './exportData'
 
 const columnsMetadata = [
     {
@@ -66,6 +55,17 @@ export default () => {
             apiBalance()
         }
     }, [])
+
+    const filterClick = (value) => {
+        dispatch(authorizationsGetAllDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return authorizationsGetAllDispatch(dataParam)
+    }
 
     useEffect(() => {
         if (resAuthorizationsGetAll?.data) {
@@ -132,6 +132,21 @@ export default () => {
     const { merchant_data, card, status, amount, currency, id, created, request_history } = activeItem || {}
     const metadataData = activeItem && activeItem?.metadata ? Object.keys(activeItem?.metadata).map((key) => ({ key, value: activeItem.metadata[key] })) : []
     // console.log(activeItem, "activeItem")
+
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
     return (
         <ArchLayout>
             <div className={scss.mainContainer}>
@@ -140,18 +155,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Authorizations</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/disputes/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/disputes/input")}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Payout"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                         <Button
                             size="small"
                             onClick={() => history.push("/disputes/input")}
@@ -259,30 +272,6 @@ export default () => {
                                 </div>
                                 : ""
                         }
-
-                        {/* <List
-                            className={scss.contentMiddle}
-                            loading={loadingGet}
-                            itemLayout="horizontal"
-                            loadMore={true}
-                            // dataSource={resCardholderGetAll.data}
-                            renderItem={item => (
-                                <List.Item className={`${scss.listItem}`}>
-                                    <Skeleton title={false} loading={item.loading} active>
-                                        <List.Item.Meta
-                                            title={
-                                                <div className={`${scss.itemMeta} ${activeItem.id === item.id && scss.activeItem}`}
-                                                >
-                                                    <div>
-                                                        {item.name}
-                                                    </div>
-                                                </div>
-                                            }
-                                        />
-                                    </Skeleton>
-                                </List.Item>
-                            )}
-                        /> */}
                     </Col>
                 </Row>
             </div>

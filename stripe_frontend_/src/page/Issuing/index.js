@@ -3,14 +3,13 @@ import React, { useState, useEffect } from 'react';
 import ArchLayout from 'components/layout/ArchLayout'
 import { useSelector, useDispatch } from 'react-redux'
 import { createBankAccountDispatch, balanceRetrieveDispatch, customersCreateSourceDispatch } from 'redux/actions'
-import Skeleton from '@material-ui/lab/Skeleton';
+import { Skeleton } from 'antd'
 import { Button, TextField, Box } from '@material-ui/core';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import useStyles from './styles'
 
 import Modal from 'components/general/Modal'
 import balancesCss from 'assets/scss/balances.module.scss'
-import config from 'assets/scss/config.module.scss'
 
 import Color from 'config/Color'
 
@@ -108,8 +107,6 @@ export default () => {
                     loadingGet ?
                         <div style={{ marginTop: 12 }}>
                             <Skeleton />
-                            <Skeleton animation={false} />
-                            <Skeleton animation="wave" />
                         </div>
                         :
                         <div className={balancesCss.contentMiddle}>

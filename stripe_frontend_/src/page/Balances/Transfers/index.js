@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
-import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { transfersListDispatch } from 'redux/actions'
 import moment from 'moment';
 import ArchLayout from 'components/layout/ArchLayout'
 import { Table, Button } from 'antd';
-import { PlusOutlined, FilterOutlined } from '@ant-design/icons'
+import { PlusOutlined } from '@ant-design/icons'
 import Pagination from 'components/general/Pagination'
 import scss from 'assets/scss/productMainCreate.module.scss'
 import { currencyFromat } from 'utils/format'
 import ModalTransfers from 'components/general/Modal/Transfers'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
+import { listColumn, defaultColumn } from './exportData'
 
 export default () => {
     const dispatch = useDispatch()
-    const history = useHistory()
     const { loading: { loadingGet }, transfers: { resTransfersList } } = useSelector(state => state)
     const [limit, setLimit] = useState(10);
     const [transferModal, setTransferModal] = useState(false)
@@ -30,6 +31,18 @@ export default () => {
         return () => {
         }
     }, [transferModal === true])
+
+
+    const filterClick = (value) => {
+        dispatch(transfersListDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return transfersListDispatch(dataParam)
+    }
 
     const columns = [
         {
@@ -57,6 +70,21 @@ export default () => {
         },
     ]
 
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
+
     return (
         <ArchLayout>
             <div>
@@ -65,12 +93,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Transfers</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            // onClick={() => history.push("/payment/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Transfers"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                         <Button
                             size="small"
                             onClick={() => setTransferModal(true)}

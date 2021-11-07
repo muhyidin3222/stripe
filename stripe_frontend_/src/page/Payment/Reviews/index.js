@@ -7,6 +7,9 @@ import { reviewGetAllDispatch } from 'redux/actions'
 import moment from 'moment';
 import ArchLayout from 'components/layout/ArchLayout'
 import Pagination from 'components/general/Pagination'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
+import { listColumn, defaultColumn } from './exportData'
 
 import scss from 'assets/scss/productMainCreate.module.scss'
 
@@ -26,6 +29,33 @@ export default () => {
 
         return () => { }
     }, [])
+
+    const filterClick = (value) => {
+        dispatch(reviewGetAllDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return reviewGetAllDispatch(dataParam)
+    }
+
+
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
 
     const columns = [
         // {
@@ -65,18 +95,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Reviews</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        {/* <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button> */}
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Reviews"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                     </div>
                 </div>
                 <div className={scss.contentMiddle}>
@@ -86,10 +114,10 @@ export default () => {
                         loading={loadingGet}
                         pagination={false}
                         size="small"
-                        footer={() => `${resReviewList?.data?.length ||0} results`}
+                        footer={() => `${resReviewList?.data?.length || 0} results`}
 
                     />
-                      <Pagination
+                    <Pagination
                         getDataApi={reviewGetAllDispatch}
                         dataList={resReviewList?.data}
                     />

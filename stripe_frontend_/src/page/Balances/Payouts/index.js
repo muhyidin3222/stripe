@@ -11,6 +11,9 @@ import Pagination from 'components/general/Pagination'
 import scss from 'assets/scss/productMainCreate.module.scss'
 import { currencyFromat } from 'utils/format'
 import ModalPayOut from 'components/general/Modal/Payout'
+import { listColumn, defaultColumn } from './exportData'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
 
 export default () => {
     const dispatch = useDispatch()
@@ -30,6 +33,17 @@ export default () => {
         return () => {
         }
     }, [customerPayout === false])
+
+    const filterClick = (value) => {
+        dispatch(payOutListDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return payOutListDispatch(dataParam)
+    }
 
     const columns = [
         {
@@ -57,6 +71,21 @@ export default () => {
         },
     ]
 
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
+
     return (
         <ArchLayout>
             <div>
@@ -65,12 +94,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Pay Out</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Payout"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                         <Button
                             size="small"
                             onClick={() => setCustomerPayout(true)}

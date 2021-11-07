@@ -172,6 +172,10 @@ body {
   left: 0;
 }
 
+.ant-layout-sider-active {
+  max-width: 250px !important;
+}
+
 .ant-layout-sider:not(.ant-layout-sider-collapsed) + .ant-layout {
   margin-left: 230px;
 }
@@ -180,7 +184,6 @@ body {
   margin-left: 0px !important;
 }
 
-
-.ant-layout-has-sider{
+.ant-layout-has-sider {
   height: 100%;
 }

@@ -15,6 +15,9 @@ import scss from 'assets/scss/productMainCreate.module.scss'
 import { currencyFromat } from 'utils/format';
 import defaultImage from 'assets/images/defaultImage.js'
 import Pagination from 'components/general/Pagination'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
+import { listColumn, defaultColumn } from './exportData'
 
 export default () => {
     const dispatch = useDispatch()
@@ -35,6 +38,32 @@ export default () => {
     //     account_number: '000123456789',
     //     account_number_repeat: '000123456789',
     // })
+
+    const filterClick = (value) => {
+        dispatch(productsGetAll({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return productsGetAll(dataParam)
+    }
+
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
 
     const apiBalance = async () => {
         await dispatch(productsGetAll({
@@ -71,7 +100,7 @@ export default () => {
         // console.log(newValue)
         setActiveTab(Number(newValue))
     }
-
+    
     const columns = [
         {
             title: 'Name',
@@ -116,18 +145,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Products</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/disputes/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/disputes/input")}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Payout"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                         <Button
                             size="small"
                             onClick={() => history.push("/products/input")}

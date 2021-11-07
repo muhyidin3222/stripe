@@ -1,33 +1,25 @@
-import React, { useState, useEffect,Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import InfiniteScroll from 'react-infinite-scroller';
 
-import { cardholderGetAllDispatch, authorizationsGetAllDispatch } from 'redux/actions'
-import moment from 'moment';
+import { cardholderGetAllDispatch } from 'redux/actions'
 import ArchLayout from 'components/layout/ArchLayout'
 import CardholderDetail from 'components/general/Card/CardholderDetail'
-import Tabs from 'components/general/Tab'
-import Color from 'config/Color'
-import { Table, Typography, Button, Skeleton, List, Col, Row, Menu } from 'antd';
-import { PlusOutlined, FilterOutlined, ExportOutlined } from '@ant-design/icons'
+import { Button, Skeleton, List, Col, Row } from 'antd';
+import { PlusOutlined } from '@ant-design/icons'
 import ModalAddCardholder from 'components/general/Modal/ModalAddCardholder'
-
-import scssConfig from 'assets/scss/config.module.scss'
 import scss from 'assets/scss/issuingMainCreate.module.scss'
-import { customersGetIdService } from 'services'
-
-const { gray } = Color.Border
-const { Title } = Typography
-const { SubMenu } = Menu;
+import { listColumn, defaultColumn } from './exportData'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
 
 export default () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { issuing: { resCardholderGetAll }, loading: { loadingGet } } = useSelector(state => state)
     const [limit, setLimit] = useState(30);
-    const [page, setPage] = useState(0);
     const [showModal, setShowModal] = useState(false)
     const [activeItem, setActiveItem] = useState({})
     // const [activeMenu, setActiveMenu] = useState(resCardholderGetAll?.data[0])
@@ -50,6 +42,17 @@ export default () => {
         setActiveItem(newValue)
     }
 
+    const filterClick = (value) => {
+        dispatch(cardholderGetAllDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return cardholderGetAllDispatch(dataParam)
+    }
+
     const handleInfiniteOnLoad = async () => {
         if (resCardholderGetAll.has_more)
             await dispatch(cardholderGetAllDispatch({
@@ -57,6 +60,20 @@ export default () => {
             }))
     }
 
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
     // console.log(activeItem, "activeItem")
     return (
         <ArchLayout>
@@ -66,18 +83,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Cards</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/disputes/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/disputes/input")}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Cards"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                         <Button
                             size="small"
                             onClick={() => setShowModal(true)}

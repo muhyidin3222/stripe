@@ -1,4 +1,4 @@
-import React, { useState, useEffect ,Fragment} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,11 +6,12 @@ import { transactionGetAllDispatch } from 'redux/actions'
 import moment from 'moment';
 import ArchLayout from 'components/layout/ArchLayout'
 import { Table } from 'antd'
-import { FilterOutlined, ExportOutlined } from '@ant-design/icons'
 import Pagination from 'components/general/Pagination'
-
 import scss from 'assets/scss/productMainCreate.module.scss'
 import { currencyFromat } from 'utils/format'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
+import { listColumn, defaultColumn } from './exportData'
 
 export default () => {
     const dispatch = useDispatch()
@@ -28,6 +29,17 @@ export default () => {
 
         return () => { }
     }, [])
+
+    const filterClick = (value) => {
+        dispatch(transactionGetAllDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return transactionGetAllDispatch(dataParam)
+    }
 
     const columns = [
         {
@@ -53,6 +65,20 @@ export default () => {
         },
     ]
 
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
 
     return (
         <ArchLayout>
@@ -62,18 +88,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Transaction</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        {/* <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button> */}
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Transaction"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                     </div>
                 </div>
                 <div className={scss.contentMiddle}>

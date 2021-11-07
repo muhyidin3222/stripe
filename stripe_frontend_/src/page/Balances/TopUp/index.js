@@ -5,15 +5,15 @@ import { useSelector, useDispatch } from 'react-redux'
 import { topUpListDispatch } from 'redux/actions'
 import moment from 'moment';
 import ArchLayout from 'components/layout/ArchLayout'
-import Tabs from 'components/general/Tab'
-import Color from 'config/Color'
-import { Table, Typography, Button, Tag } from 'antd';
-import { PlusOutlined, FilterOutlined, ExportOutlined } from '@ant-design/icons'
-import scssConfig from 'assets/scss/config.module.scss'
+import { Table, Button, Tag } from 'antd';
+import { PlusOutlined } from '@ant-design/icons'
 import scss from 'assets/scss/productMainCreate.module.scss'
 import { currencyFromat } from 'utils/format'
 import Pagination from 'components/general/Pagination'
 import ModelBalance from 'components/general/Modal/Balances'
+import { listColumn, defaultColumn } from './exportData'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
 
 export default () => {
     const dispatch = useDispatch()
@@ -34,6 +34,17 @@ export default () => {
         return () => {
         }
     }, [])
+
+    const filterClick = (value) => {
+        dispatch(topUpListDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return topUpListDispatch(dataParam)
+    }
 
     const columns = [
         {
@@ -70,6 +81,21 @@ export default () => {
         },
     ]
 
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
+
     console.log(resTopUpList)
     return (
         <ArchLayout>
@@ -79,12 +105,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Top-ups</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Top-ups"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                         <Button
                             size="small"
                             onClick={() => setOpenModalCreate(true)}

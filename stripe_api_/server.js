@@ -24,6 +24,7 @@ const path = require('path');
 const router = require(`${__dirname}/apps/routes`)()
 const routerPrivateUser = require(`${__dirname}/apps/routes/privateUser`)()
 const globalAuth = _lib('globalAuth')
+const listRouterFE = require(`./apps/routes/listRouterFE`)
 
 //Init app start
 const app = express();
@@ -44,15 +45,16 @@ app.use(bodyParser.urlencoded({
   limit: '50mb',
   parameterLimit: 1000000
 }))
+
 app.all('/privateUser/*', (req, res, next) => globalAuth(req, res, next))
-
-app.use(express.static(path.join(__dirname, '../stripe_frontend_/build')));
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../stripe_frontend_/build', 'index.html'));
-});
-
+listRouterFE.map(val => (
+  app.get(val, function (req, res) {
+    res.sendFile(path.join(__dirname, '../stripe_frontend_/build', 'index.html'));
+  })
+))
 app.use(router)
 app.use(routerPrivateUser)
+app.use(express.static(path.join(__dirname, '../stripe_frontend_/build')));
 
 // const corsOptions = {
 //   origin: "http://localhost:3000"

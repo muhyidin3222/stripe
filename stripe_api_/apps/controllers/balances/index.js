@@ -35,12 +35,9 @@ exports.createBankAccount = async (req, res, next) => {
 }
 
 exports.balanceRetrieveCtl = async (req, res, next) => {
-    await balanceRetrieve((error, resBalance) => {
-        console.log(resBalance)
-        if (error)
-            res.error(error)
-        res.success(resBalance)
-    })
+    console.log(req)
+    const resBalance = await balanceRetrieve()
+    res.success(resBalance)
 }
 
 exports.customersCreateSourcCtl = async (req, res, next) => {

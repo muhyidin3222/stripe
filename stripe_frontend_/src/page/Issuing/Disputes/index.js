@@ -5,12 +5,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { disputesGetAllDispatch } from 'redux/actions'
 import moment from 'moment';
 import ArchLayout from 'components/layout/ArchLayout'
-import { Button, Table, Tabs } from 'antd'
-import { FilterOutlined, ExportOutlined } from '@ant-design/icons'
+import { Table, Tabs } from 'antd'
 import Pagination from 'components/general/Pagination'
-
 import scss from 'assets/scss/productMainCreate.module.scss'
 import { currencyFromat } from 'utils/format'
+import { listColumn, defaultColumn } from './exportData'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
 
 const { TabPane } = Tabs;
 
@@ -19,9 +20,8 @@ export default () => {
     const history = useHistory()
     const { customers: { resDisputeGetAll }, loading: { loadingGet } } = useSelector(state => state)
     const [limit, setLimit] = useState(10);
-    const [loadingDonwload, setLoadingDonwload] = useState(false)
-    // const [page, setPage] = useState(0);
     const [spendingCt, setSpendingCt] = useState("all")
+    
     useEffect(() => {
         let paramData = {
             limit
@@ -31,6 +31,17 @@ export default () => {
         dispatch(disputesGetAllDispatch(paramData))
         return () => { }
     }, [spendingCt])
+
+    const filterClick = (value) => {
+        dispatch(disputesGetAllDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return disputesGetAllDispatch(dataParam)
+    }
 
     const columns = [
         {
@@ -56,61 +67,20 @@ export default () => {
     ]
 
 
-    // const onDonwload = async () => {
-    //     setLoadingDonwload(true)
-    //     try {
-    //         const responeData = await getParticipantsS({ total_items: dataParticipan.count, page: 1, id })
-    //         var columns = [
-    //             {
-    //                 label: 'Id/Id Booking',
-    //                 value: 'id'
-    //             },
-    //             {
-    //                 label: 'Email',
-    //                 value: row => row.user?.email
-    //             },
-    //             {
-    //                 label: 'Name',
-    //                 value: row => row.user?.username
-    //             },
-    //             {
-    //                 label: 'Member',
-    //                 value: row => row.user?.payment
-    //             },
-    //             {
-    //                 label: 'phone',
-    //                 value: row => row.user?.mobile_number
-    //             },
-    //             {
-    //                 label: 'payment type',
-    //                 value: row => row.payment?.payment_type
-    //             },
-    //             {
-    //                 label: 'bank',
-    //                 value: row => row.payment?.bank
-    //             },
-    //             {
-    //                 label: 'date payment',
-    //                 value: row => row.payment?.transaction_time
-    //             }
-    //         ]
-
-    //         var settings = {
-    //             sheetName: 'First sheet',
-    //             fileName: 'Data Peserta ' + title,
-    //             extraLength: 3,
-    //             writeOptions: {}
-    //         }
-
-    //         var download = true
-
-    //         await xlsx(columns, responeData.data.payload.rows, settings, download)
-    //         setLoadingDonwload(false)
-    //     } catch (error) {
-    //         console.log(error)
-    //         setLoadingDonwload(false)
-    //     }
-    // }
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
 
     return (
         <ArchLayout>
@@ -120,18 +90,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Disputes</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Disputes"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                     </div>
                 </div>
 

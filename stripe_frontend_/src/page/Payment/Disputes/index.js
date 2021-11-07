@@ -6,15 +6,14 @@ import { disputesListDispatch } from 'redux/actions'
 import moment from 'moment';
 import ArchLayout from 'components/layout/ArchLayout'
 import Tabs from 'components/general/Tab'
-import Color from 'config/Color'
-import { Table, Typography, Button } from 'antd';
-import { PlusOutlined, FilterOutlined, ExportOutlined } from '@ant-design/icons'
+import { Table, Button } from 'antd';
+import { PlusOutlined } from '@ant-design/icons'
 import Pagination from 'components/general/Pagination'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
+import { listColumn, defaultColumn } from './exportData'
 
 import scss from 'assets/scss/productMainCreate.module.scss'
-
-const { gray } = Color.Border
-const { Title } = Typography
 
 const tabsData = [
     { label: "All" },
@@ -34,7 +33,6 @@ export default () => {
         const apiBalance = async () => {
             await dispatch(disputesListDispatch({
                 limit: limit,
-                // active: activeTab ? false : true
             }))
         }
         apiBalance()
@@ -44,8 +42,18 @@ export default () => {
     }, [activeTab])
 
     const handleChangeActiveTab = (newValue) => {
-        console.log(newValue)
         setActiveTab(Number(newValue))
+    }
+
+    const filterClick = (value) => {
+        dispatch(disputesListDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return disputesListDispatch(dataParam)
     }
 
     const columns = [
@@ -79,7 +87,21 @@ export default () => {
         },
     ]
 
-    console.log(resDisputesList)
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
+    
     return (
         <ArchLayout>
             <div>
@@ -88,18 +110,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Coupons</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/disputes/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/disputes/input")}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Coupons"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                         <Button
                             size="small"
                             onClick={() => history.push("/disputes/input")}

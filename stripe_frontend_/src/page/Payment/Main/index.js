@@ -6,17 +6,14 @@ import { paymentListDispatch } from 'redux/actions'
 import moment from 'moment';
 import ArchLayout from 'components/layout/ArchLayout'
 import Tabs from 'components/general/Tab'
-import Color from 'config/Color'
 import { Table, Typography, Button } from 'antd';
 import { PlusOutlined, FilterOutlined, ExportOutlined } from '@ant-design/icons'
 import Pagination from 'components/general/Pagination'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
+import { listColumn, defaultColumn } from './exportData'
 
-import scssConfig from 'assets/scss/config.module.scss'
 import scss from 'assets/scss/productMainCreate.module.scss'
-import { customersGetIdService } from 'services'
-
-const { gray } = Color.Border
-const { Title } = Typography
 
 const tabsData = [
     { label: "All" },
@@ -30,6 +27,7 @@ export default () => {
     const history = useHistory()
     const { payment: { resPaymentList }, loading: { loadingGet }, loading } = useSelector(state => state)
     const [activeTab, setActiveTab] = useState(0)
+    const [limit, setLimit] = useState(10);
 
     useEffect(() => {
         const apiBalance = async () => {
@@ -43,9 +41,39 @@ export default () => {
         }
     }, [activeTab])
 
+
+    const filterClick = (value) => {
+        dispatch(paymentListDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return paymentListDispatch(dataParam)
+    }
+
+
     const handleChangeActiveTab = (newValue) => {
         setActiveTab(Number(newValue))
     }
+
+
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
+
     const columns = [
         {
             title: 'AMOUNT',
@@ -84,18 +112,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Payment</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Payment"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                         <Button
                             size="small"
                             onClick={() => history.push("/payment/input")}

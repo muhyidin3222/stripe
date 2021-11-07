@@ -3,10 +3,8 @@ import { Link as withRouter, useHistory } from 'react-router-dom';
 import scss from 'assets/scss/components.module.scss';
 import { Layout, Input, Space, Menu, Dropdown, Button, Typography } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined } from '@ant-design/icons';
-import { setCookie, getCookie, deleteCookie } from 'utils/cookies'
 
 const { Header } = Layout;
-const { Title, Text } = Typography
 
 const Topbar = props => {
   const { setCollapsed, collapsed, style } = props;
@@ -20,7 +18,7 @@ const Topbar = props => {
   const menu = (
     <Menu>
       <Menu.Item>
-        <Text className={scss.title}>Ahmad Muhyidin</Text>
+        {/* <Text className={scss.title}>Ahmad Muhyidin</Text> */}
         <div className={scss.dec}>Administrator</div>
       </Menu.Item>
       <Menu.Item style={{ marginTop: 10 }}>
@@ -39,7 +37,7 @@ const Topbar = props => {
     >
       <div className={scss.wpHeader}>
         <Button
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={setCollapsed}
           type="link"
         >
           {

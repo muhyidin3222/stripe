@@ -229,7 +229,7 @@ export default function Index (props) {
                 <Table
                     // columns={columnsSpendingLimit}
                     style={{ width: "100%" }}
-                    footer={() => `${spending_limits.length || 0} results`}
+                    footer={() => `${spending_limits?.length || 0} results`}
                     dataSource={spending_limits}
                     className={scss.tabelStyle}
                     size="small"

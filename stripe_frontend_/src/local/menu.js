@@ -163,16 +163,16 @@ export default [
             }
         ]
     },
-    {
-        "path": "/setting/main",
-        "name": "Setting",
-        "icon": <SettingsIcon />,
-        "subMenu": [
-            {
-                "path": "/setting/account",
-                "name": "Account",
-                "manPath": '/setting'
-            },
-        ]
-    },
+    // {
+    //     "path": "/setting/main",
+    //     "name": "Setting",
+    //     "icon": <SettingsIcon />,
+    //     "subMenu": [
+    //         {
+    //             "path": "/setting/account",
+    //             "name": "Account",
+    //             "manPath": '/setting'
+    //         },
+    //     ]
+    // },
 ]

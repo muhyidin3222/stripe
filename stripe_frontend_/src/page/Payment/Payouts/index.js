@@ -8,6 +8,9 @@ import ArchLayout from 'components/layout/ArchLayout'
 import { Button, Table, Tabs } from 'antd'
 import { FilterOutlined, ExportOutlined } from '@ant-design/icons'
 import Pagination from 'components/general/Pagination'
+import Filter from 'components/general/Select/Filter'
+import Export from 'components/general/Modal/Export'
+import { listColumn, defaultColumn } from './exportData'
 
 import scss from 'assets/scss/productMainCreate.module.scss'
 import { currencyFromat } from 'utils/format'
@@ -31,6 +34,17 @@ export default () => {
         return () => { }
     }, [quoteCt])
 
+
+    const filterClick = (value) => {
+        dispatch(payOutListDispatch({
+            limit: limit,
+            ...value
+        }))
+    }
+
+    const getDataDownload = async (dataParam) => {
+        return payOutListDispatch(dataParam)
+    }
 
     const columns = [
 
@@ -57,6 +71,21 @@ export default () => {
         }
     ]
 
+    const listFilter = [
+        {
+            title: "Create Date",
+            value: "create_date",
+            type: 'date',
+            checked: false
+        },
+        {
+            title: "Email",
+            value: "email",
+            type: 'input',
+            checked: false
+        }
+    ]
+
     return (
         <ArchLayout>
             <div>
@@ -65,18 +94,16 @@ export default () => {
                         <div className={`${scss.titleXl}  ${scss.paddingBottom}`} >Quote</div>
                     </div>
                     <div style={{ display: "flex" }}>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<FilterOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Filter</Button>
-                        <Button
-                            size="small"
-                            onClick={() => history.push("/payment/input")}
-                            icon={<ExportOutlined />}
-                            style={{ marginLeft: 10 }}
-                        >Export</Button>
+                        <Filter
+                            doneClick={filterClick}
+                            listMap={listFilter}
+                        />
+                        <Export
+                            onGetApi={getDataDownload}
+                            title={"Quote"}
+                            dataColumn={listColumn}
+                            selectDataProps={defaultColumn}
+                        />
                     </div>
                 </div>
 
