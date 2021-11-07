@@ -55,9 +55,9 @@ const Login = () => {
         // console.log(dataCryptoEncrypt)
         const resLogin = await loginService({ dataEncrypt: dataCryptoEncrypt })
         if (resLogin?.data?.payload) {
+          await setCookie('token', resLogin?.data?.payload?.token, 1)
+          await setCookie('public_key', dataInput?.public_key, 1)
           await disputes(verifyAuth(true))
-          await setCookie('token', resLogin?.data?.payload?.token, 30)
-          await setCookie('public_key', dataInput?.public_key, 30)
           await message.success("success login")
           await history.push("/customers/main")
           window.location.reload();
