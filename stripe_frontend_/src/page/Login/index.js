@@ -52,7 +52,7 @@ const Login = () => {
         const resLogin = await loginService({ dataEncrypt: dataCryptoEncrypt })
         if (resLogin?.data?.payload) {
           console.log(resLogin?.data?.payload?.token)
-          await setCookie('token', resLogin?.data?.payload?.token, 1)
+          await setCookie("Authorization", resLogin?.data?.payload?.token, 1)
           await setCookie('public_key', dataInput?.public_key, 1)
           await disputes(verifyAuth(true))
           await message.success("success login")

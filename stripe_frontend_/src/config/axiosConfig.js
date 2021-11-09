@@ -4,7 +4,7 @@ import { getCookie } from 'utils/cookies'
 
 const axiosApiInstance = axios.create();
 axiosApiInstance.interceptors.request.use(async config => {
-    const dataCookie = await getCookie('token')
+    const dataCookie = await getCookie('Authorization')
     config.headers.Authorization = dataCookie
     config.baseURL = base;
     return config;

@@ -19,7 +19,7 @@ export function getCookie(name) {
 }
 
 export async function deleteCookie() {
-  document.cookie = `token=""; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/`;
+  document.cookie = `Authorization=""; expires=Thu, 18 Dec 2013 12:00:00 UTC; path=/`;
 }
 
 export async function deleteCookieName(name) {
