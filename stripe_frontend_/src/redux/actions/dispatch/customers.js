@@ -44,7 +44,7 @@ export const customersListDispatch = (data) => async (dispatch, getState) => {
         const resCustomersList = await customersListService(data)
         dispatch({ type: CUSTOMERS_GET, resCustomersList: resCustomersList?.data?.payload })
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         errorHandle({ error, typeError: ERROR_GET, dispatch, typeLoading: LOADING_GET })
     }
     dispatch({ type: LOADING_GET, loadingGet: false })

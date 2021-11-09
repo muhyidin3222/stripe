@@ -2,15 +2,12 @@ import axios from 'axios';
 import { base } from './init'
 import { getCookie } from 'utils/cookies'
 
-export default (() => {
-    const dataCookie = getCookie('token')
-    return axios.create({
-        // timeout: 10000,
-        baseURL: base,
-        headers: {
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "*",
-            'Authorization': dataCookie
-        },
-    })
-})()
+const axiosApiInstance = axios.create();
+axiosApiInstance.interceptors.request.use(async config => {
+    const dataCookie = await getCookie('token')
+    config.headers.Authorization = dataCookie
+    config.baseURL = base;
+    return config;
+})
+
+export default axiosApiInstance
